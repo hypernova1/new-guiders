@@ -19,5 +19,7 @@
 Spring Security Oauth, WebSocket, AWS EC2, Docker, Swagger...
 
 ## 실행 방법
-1. cd frontend && npm run build
-2. cd .. && gradle bootJar
+~~~
+$ cd frontend && npm run build
+$ cd .. && gradle bootJar
+~~~
