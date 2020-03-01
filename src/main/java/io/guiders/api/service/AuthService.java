@@ -1,7 +1,7 @@
 package io.guiders.api.service;
 
-import io.guiders.api.domain.Guider;
 import io.guiders.api.domain.Member;
+import io.guiders.api.exception.MemberNotFoundException;
 import io.guiders.api.payload.MemberDto;
 import io.guiders.api.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,13 @@ public class AuthService {
     private final MemberRepository memberRepository;
 
     public Member joinMember(MemberDto.JoinRequest joinRequest) {
-
-        Member member = modelMapper.map(joinRequest, Guider.class);
-
+        Member member = modelMapper.map(joinRequest, Member.class);
         return memberRepository.save(member);
-
     }
 
 
-
+    public Member loginMember(MemberDto.LoginRequest loginRequest) {
+        return memberRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
+                .orElseThrow(MemberNotFoundException::new);
+    }
 }

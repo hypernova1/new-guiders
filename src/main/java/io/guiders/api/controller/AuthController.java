@@ -2,6 +2,7 @@ package io.guiders.api.controller;
 
 import com.sun.jndi.toolkit.url.Uri;
 import io.guiders.api.domain.Member;
+import io.guiders.api.payload.ApiResponse;
 import io.guiders.api.payload.MemberDto;
 import io.guiders.api.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,15 @@ public class AuthController {
                 .buildAndExpand(member.getId()).toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<?> login(@RequestBody MemberDto.LoginRequest loginRequest) {
+
+        Member member = authService.loginMember(loginRequest);
+
+        return ResponseEntity.ok(member);
+
     }
 
 }
