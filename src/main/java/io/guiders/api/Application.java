@@ -19,11 +19,11 @@ public class Application {
     @Bean
     CommandLineRunner insertDB(MemberRepository memberRepository) {
         return args -> {
-            Guider guider = new Guider();
+            /*Guider guider = new Guider();
             guider.setName("test");
             guider.setEmail("test@test.com");
 
-            memberRepository.save(guider);
+            memberRepository.save(guider);*/
         };
     }
 

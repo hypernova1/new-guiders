@@ -11,5 +11,4 @@ import javax.persistence.Entity;
 @DiscriminatorValue("G")
 public class Guider extends Member {
 
-
 }
