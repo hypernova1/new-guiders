@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-public class MemberDto {
+public class UserDto {
 
     @Getter @Setter
     public static class JoinRequest {

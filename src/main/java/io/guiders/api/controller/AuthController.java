@@ -1,9 +1,7 @@
 package io.guiders.api.controller;
 
-import com.sun.jndi.toolkit.url.Uri;
-import io.guiders.api.domain.Member;
-import io.guiders.api.payload.ApiResponse;
-import io.guiders.api.payload.MemberDto;
+import io.guiders.api.domain.User;
+import io.guiders.api.payload.UserDto;
 import io.guiders.api.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +18,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody MemberDto.JoinRequest joinRequest) {
+    public ResponseEntity<?> join(@RequestBody UserDto.JoinRequest joinRequest) {
 
-        Member member = authService.joinMember(joinRequest);
+        User member = authService.joinMember(joinRequest);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
@@ -32,12 +30,11 @@ public class AuthController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody MemberDto.LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody UserDto.LoginRequest loginRequest) {
 
-        Member member = authService.loginMember(loginRequest);
+        User member = authService.loginMember(loginRequest);
 
         return ResponseEntity.ok(member);
-
     }
 
 }

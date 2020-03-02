@@ -1,9 +1,10 @@
 package io.guiders.api.service;
 
-import io.guiders.api.domain.Member;
+import io.guiders.api.domain.Guider;
+import io.guiders.api.domain.User;
 import io.guiders.api.exception.MemberNotFoundException;
-import io.guiders.api.payload.MemberDto;
-import io.guiders.api.repository.MemberRepository;
+import io.guiders.api.payload.UserDto;
+import io.guiders.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,16 @@ public class AuthService {
 
     private final ModelMapper modelMapper;
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
-    public Member joinMember(MemberDto.JoinRequest joinRequest) {
-        Member member = modelMapper.map(joinRequest, Member.class);
-        return memberRepository.save(member);
+    public User joinMember(UserDto.JoinRequest joinRequest) {
+        User member = modelMapper.map(joinRequest, Guider.class);
+        return userRepository.save(member);
     }
 
 
-    public Member loginMember(MemberDto.LoginRequest loginRequest) {
-        return memberRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
+    public User loginMember(UserDto.LoginRequest loginRequest) {
+        return userRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
                 .orElseThrow(MemberNotFoundException::new);
     }
 }

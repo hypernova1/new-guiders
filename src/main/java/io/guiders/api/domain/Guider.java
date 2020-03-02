@@ -7,8 +7,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@Getter @Setter
 @DiscriminatorValue("G")
-public class Guider extends Member {
+@Getter @Setter
+public class Guider extends User {
 
 }

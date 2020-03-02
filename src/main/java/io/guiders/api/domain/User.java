@@ -10,9 +10,9 @@ import javax.validation.constraints.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "user_type")
 @Getter @Setter
-public abstract class Member extends DateAudit {
+public abstract class User extends DateAudit {
 
     @Id
     @GeneratedValue

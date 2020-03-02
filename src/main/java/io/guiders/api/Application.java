@@ -1,7 +1,6 @@
 package io.guiders.api;
 
-import io.guiders.api.domain.Guider;
-import io.guiders.api.repository.MemberRepository;
+import io.guiders.api.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +16,7 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner insertDB(MemberRepository memberRepository) {
+    CommandLineRunner insertDB(UserRepository userRepository) {
         return args -> {
             /*Guider guider = new Guider();
             guider.setName("test");

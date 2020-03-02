@@ -3,12 +3,11 @@ package io.guiders.api.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-@Getter @Setter
 @DiscriminatorValue("F")
-public class Follower extends Member {
+@Getter @Setter
+public class Follower extends User {
 
 }
