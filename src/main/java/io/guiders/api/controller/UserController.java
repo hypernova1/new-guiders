@@ -36,7 +36,7 @@ public class UserController {
                                             @Valid UserDto.ModifyRequest modifyRequest) {
 
         modifyRequest.setId(id);
-        User user = userService.modifyUserInfo(modifyRequest);
+        UserDto.UserResponse user = userService.modifyUserInfo(modifyRequest);
 
         return ResponseEntity.ok(user);
     }

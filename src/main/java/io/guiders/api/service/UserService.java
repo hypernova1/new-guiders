@@ -19,18 +19,19 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-
     public List<UserDto.UserResponse> getUserList(Pageable pageable) {
         return userRepository.findAll(pageable)
-                .getContent().stream()
+                .getContent()
+                .stream()
                 .map(user -> modelMapper.map(user, UserDto.UserResponse.class))
                 .collect(Collectors.toList());
     }
 
-    public User modifyUserInfo(UserDto.ModifyRequest modifyRequest) {
+    public UserDto.UserResponse modifyUserInfo(UserDto.ModifyRequest modifyRequest) {
         User user = userRepository.findById(modifyRequest.getId()).orElseThrow(MemberNotFoundException::new);
         user.setName(modifyRequest.getName());
         user.setPassword(modifyRequest.getPassword());
-        return user;
+
+        return modelMapper.map(user, UserDto.UserResponse.class);
     }
 }

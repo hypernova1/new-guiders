@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -18,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody UserDto.JoinRequest joinRequest) {
+    public ResponseEntity<?> join(@Valid @RequestBody UserDto.JoinRequest joinRequest) {
 
         User member = authService.joinMember(joinRequest);
 
@@ -30,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto.LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@Valid @RequestBody UserDto.LoginRequest loginRequest) {
 
         User member = authService.loginMember(loginRequest);
 

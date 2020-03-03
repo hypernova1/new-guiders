@@ -1,5 +1,6 @@
 package io.guiders.api.service;
 
+import io.guiders.api.domain.Follower;
 import io.guiders.api.domain.Guider;
 import io.guiders.api.domain.User;
 import io.guiders.api.exception.MemberNotFoundException;
@@ -18,8 +19,12 @@ public class AuthService {
     private final UserRepository userRepository;
 
     public User joinMember(UserDto.JoinRequest joinRequest) {
-        User member = modelMapper.map(joinRequest, Guider.class);
-        return userRepository.save(member);
+
+        if (joinRequest.getMemberType().equals("G")) {
+            return userRepository.save(modelMapper.map(joinRequest, Guider.class));
+        }
+
+        return userRepository.save(modelMapper.map(joinRequest, Follower.class));
     }
 
 
