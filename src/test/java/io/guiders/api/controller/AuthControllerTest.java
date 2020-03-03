@@ -23,7 +23,7 @@ public class AuthControllerTest {
 
         mockMvc.perform(post("/auth/join")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"email\": \"hypemova@naver.com\", \"name\": \"sam\", \"password\": \"1111\", \"memberType\" : \"F\" }"))
+                .content("{ \"email\": \"hypemova@naver.com\", \"name\": \"sam\", \"password\": \"1111\", \"memberType\" : \"G\" }"))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
