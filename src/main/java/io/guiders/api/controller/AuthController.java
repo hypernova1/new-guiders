@@ -29,7 +29,7 @@ public class AuthController {
         return ResponseEntity.created(location).build();
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserDto.LoginRequest loginRequest) {
 
         User member = authService.loginMember(loginRequest);

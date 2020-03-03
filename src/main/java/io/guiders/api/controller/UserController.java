@@ -1,6 +1,7 @@
 package io.guiders.api.controller;
 
 import io.guiders.api.domain.User;
+import io.guiders.api.payload.UserDto;
 import io.guiders.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,13 +24,23 @@ public class UserController {
                                          @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page - 1, size);
-
-        List<User> userList = userService.getUserList(pageable);
+        List<UserDto.UserResponse> userList = userService.getUserList(pageable);
 
         if (userList.size() == 0) return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(userList);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> modifyUserInfo(@PathVariable Long id,
+                                            @Valid UserDto.ModifyRequest modifyRequest) {
+
+        modifyRequest.setId(id);
+        User user = userService.modifyUserInfo(modifyRequest);
+
+        return ResponseEntity.ok(user);
+    }
+
 
 
 }
