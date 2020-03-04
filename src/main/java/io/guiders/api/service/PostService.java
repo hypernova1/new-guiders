@@ -1,11 +1,10 @@
 package io.guiders.api.service;
 
+import io.guiders.api.domain.Essay;
 import io.guiders.api.domain.Guider;
-import io.guiders.api.domain.Post;
-import io.guiders.api.domain.constant.PostType;
 import io.guiders.api.exception.MemberNotFoundException;
-import io.guiders.api.payload.PostDto;
-import io.guiders.api.repository.PostRepository;
+import io.guiders.api.payload.EssayDto;
+import io.guiders.api.repository.EssayRepository;
 import io.guiders.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,26 +21,24 @@ public class PostService {
 
     private final ModelMapper modelMapper;
 
-    private final PostRepository postRepository;
+    private final EssayRepository essayRepository;
     private final UserRepository userRepository;
 
-    public List<PostDto.Response> getPostList(Pageable pageable) {
-        return postRepository.findAll(pageable).getContent()
+    public List<EssayDto.Response> getEssayList(Pageable pageable) {
+        return essayRepository.findAll(pageable).getContent()
                 .stream()
-                .map(post -> modelMapper.map(post, PostDto.Response.class))
+                .map(post -> modelMapper.map(post, EssayDto.Response.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public PostDto.Response registerPost(PostDto.Request request) {
+    public EssayDto.Response registerEssay(EssayDto.Request request) {
 
         Guider byId = (Guider) userRepository.findById(1L).orElseThrow(MemberNotFoundException::new);
 
-        Post post = modelMapper.map(request, Post.class);
-        post.setPostType(PostType.TEST);
-        System.out.println(post.toString());
-        post.setWriter(byId);
-        Post save = postRepository.save(post);
-        return modelMapper.map(save, PostDto.Response.class);
+        Essay essay = modelMapper.map(request, Essay.class);
+        essay.setGuider(byId);
+        Essay save = essayRepository.save(essay);
+        return modelMapper.map(save, EssayDto.Response.class);
     }
 }

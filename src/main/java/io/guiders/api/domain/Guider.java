@@ -14,11 +14,11 @@ import java.util.List;
 public class Guider extends User {
 
     @OneToMany
-    private List<Post> posts;
+    private List<Essay> essays;
 
-    public void addPost(Post post) {
-        post.setWriter(this);
-        posts.add(post);
+    public void addEssay(Essay essay) {
+        essay.setGuider(this);
+        essays.add(essay);
     }
 
 }

@@ -10,10 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@MappedSuperclass
 @Getter @Setter
-@ToString
-public class Post extends DateAudit {
+public abstract class Post extends DateAudit {
 
     @Id
     @GeneratedValue
@@ -22,11 +21,7 @@ public class Post extends DateAudit {
     @NotBlank
     private String title;
 
-    @NotNull
-    @ManyToOne
-    private Guider writer;
-
-    private PostType postType;
-
+    @NotBlank
+    private String content;
 
 }

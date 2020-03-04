@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final ModelMapper modelMapper;
-
     private final UserRepository userRepository;
 
     public User joinMember(UserDto.JoinRequest joinRequest) {

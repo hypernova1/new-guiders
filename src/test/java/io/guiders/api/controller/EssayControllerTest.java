@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PostControllerTest {
+class EssayControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -27,7 +27,7 @@ class PostControllerTest {
 
         String requestData = "{\"title\": \"test\", \"content\": \"test\"}";
 
-        mockMvc.perform(post("/post")
+        mockMvc.perform(post("/essay")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestData))
                 .andDo(print())
@@ -36,7 +36,7 @@ class PostControllerTest {
 
     @Test
     void getPostList() throws Exception {
-        mockMvc.perform(get("/post"))
+        mockMvc.perform(get("/essay"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)));

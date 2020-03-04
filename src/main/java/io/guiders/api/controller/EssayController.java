@@ -1,6 +1,6 @@
 package io.guiders.api.controller;
 
-import io.guiders.api.payload.PostDto;
+import io.guiders.api.payload.EssayDto;
 import io.guiders.api.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -9,40 +9,38 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriBuilder;
-import org.springframework.web.util.UriBuilderFactory;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/essay")
 @RequiredArgsConstructor
-public class PostController {
+public class EssayController {
 
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<?> getPostList(@RequestParam(defaultValue = "1") int page,
+    public ResponseEntity<?> getEssayList(@RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "id");
 
-        List postList = postService.getPostList(pageable);
+        List essayList = postService.getEssayList(pageable);
 
-        return ResponseEntity.ok(postList);
+        return ResponseEntity.ok(essayList);
     }
 
     @PostMapping
-    public ResponseEntity<?> registerPost(@Valid @RequestBody PostDto.Request request) {
+    public ResponseEntity<?> registerEssay(@Valid @RequestBody EssayDto.Request request) {
 
-        PostDto.Response post = postService.registerPost(request);
+        EssayDto.Response essay = postService.registerEssay(request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path("{id}")
-                .buildAndExpand(post.getId()).toUri();
+                .buildAndExpand(essay.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
 

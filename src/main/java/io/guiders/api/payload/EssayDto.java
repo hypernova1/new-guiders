@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-public class PostDto {
+public class EssayDto {
 
     @Getter @Setter
     public static class Response {
